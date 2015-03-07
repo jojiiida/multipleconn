@@ -3,19 +3,12 @@
 <head>
 <title>Orders : View all</title>
 <link rel="stylesheet" href="styles/kendo.common.min.css" />
-<link rel="stylesheet" href="../../styles/kendo.default.min.css" />
-<link rel="stylesheet" href="../../styles/kendo.dataviz.min.css" />
-<link rel="stylesheet" href="../../styles/kendo.dataviz.default.min.css" />
-<link rel="stylesheet" href="../../styles/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/kendo.default.min.css" />
+<link rel="stylesheet" href="styles/bootstrap.min.css" />
 </head>
 <body>
 	<h1>Messages : View all</h1>
-	<div class="container" id="app"></div>
-	<script src="../../javascript/backbone.js"></script>
-	
-	<div class="pull-right">
-		<a href="form.html" th:href="@{/(form)}">Create Order</a>
-	</div>
+	<div class="container" id="app">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -31,16 +24,25 @@
 			<tr th:if="${orders.empty}">
 				<td colspan="6">No orders</td>
 			</tr>
-			<tr th:each="order : ${orders}">
-				<td th:text="${order.id}">1</td>
-				<td th:text="${order.ccyPair}"></td>
-				<td th:text="${order.buySell}"></td>
-				<td th:text="${order.amount}"></td>
-				<td th:text="${order.rate}"></td>
-				<td th:text="${#calendars.format(order.valueDate)}">July 11,
-					2012 2:17:16 PM CDT</td>
-			</tr>
+			<div id="orders"></div>
 		</tbody>
-	</table>
+		</table>
+	</div>
+	<script src="../../javascript/jquery/dist/jquery.min.js"></script>
+	<script src="../../javascript/underscore/underscore-min.js"></script>
+	<script src="../../javascript/backbone/backbone.js"></script>
+	<script type="text/template" id="orders_template">
+			<tr>
+				<td th:text="${order.id}"><%= id %></td>
+				<td th:text="${order.ccyPair}"><%= ccyPair %></td>
+				<td th:text="${order.buySell}"><%= buySell %></td>
+				<td th:text="${order.amount}"><%= amount %></td>
+				<td th:text="${order.rate}"><%= rate %></td>
+				<td th:text="${#calendars.format(order.valueDate)}"><%= valueDate %></td>
+			</tr>
+	</script> 
+	<div class="pull-right">
+		<a href="form.html" th:href="@{/(form)}">Create Order</a>
+	</div>
 </body>
 </html>
